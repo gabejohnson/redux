@@ -1,0 +1,27 @@
+{
+  "name": "shopping-cart",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Hardy Jones <jones3.hardy@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/reactjs/redux",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^3.0.0",
+    "purescript-console": "^3.0.0",
+    "purescript-maybe": "^3.0.0",
+    "purescript-functions": "^3.0.0",
+    "purescript-halogen": "^2.0.1"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^3.0.0"
+  }
+}

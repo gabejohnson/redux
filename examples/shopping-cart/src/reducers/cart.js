@@ -1,7 +1,9 @@
 import {
   ADD_TO_CART,
   CHECKOUT_REQUEST,
-  CHECKOUT_FAILURE
+  CLEAR_CART,
+  CHECKOUT_FAILURE,
+  BUY_ALL
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
 const addedIds = (state = initialState.addedIds, action) => {
   switch (action.type) {
     case ADD_TO_CART:
+    case BUY_ALL:
       if (state.indexOf(action.productId) !== -1) {
         return state
       }
@@ -22,11 +25,15 @@ const addedIds = (state = initialState.addedIds, action) => {
 }
 
 const quantityById = (state = initialState.quantityById, action) => {
+  const { productId } = action
   switch (action.type) {
-    case ADD_TO_CART:
-      const { productId } = action
+  case ADD_TO_CART:
+    return { ...state,
+             [productId]: (state[productId] || 0) + 1
+           }
+    case BUY_ALL:
       return { ...state,
-        [productId]: (state[productId] || 0) + 1
+        [productId]: (state[productId] || 0) + action.inventory
       }
     default:
       return state
@@ -44,6 +51,8 @@ const cart = (state = initialState, action) => {
       return initialState
     case CHECKOUT_FAILURE:
       return action.cart
+    case CLEAR_CART:
+      return initialState
     default:
       return {
         addedIds: addedIds(state.addedIds, action),
